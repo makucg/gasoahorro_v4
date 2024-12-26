@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root.political {
+  --nextui-background-gradientStart: #f0ecd8;
+  --nextui-background-gradientEnd: #c6c2a3;
+  --nextui-background-fillColor: #4a4a4a;
+}
+
+:root.posthog {
+  --nextui-background-gradientStart: #1c1e26;
+  --nextui-background-gradientEnd: #6078ff;
+  --nextui-background-fillColor: #ffffff;
+}
+
+:root.blossomTheme {
+  --nextui-background-gradientStart: #f9ebea;
+  --nextui-background-gradientEnd: #f5b7b1;
+  --nextui-background-fillColor: #333333;
+}
+
+:root.darkBlue {
+  --nextui-background-gradientStart: #1c1f26;
+  --nextui-background-gradientEnd: #394989;
+  --nextui-background-fillColor: #fafafa;
+}
+
+:root.fluentTheme {
+  --nextui-background-gradientStart: #f8f8f8;
+  --nextui-background-gradientEnd: #d1d1d1;
+  --nextui-background-fillColor: #000000;
+}
+
+:root.light {
+  --nextui-background-gradientStart: #ffffff;
+  --nextui-background-gradientEnd: #d9d9d9;
+  --nextui-background-fillColor: #333333;
+}
+
+:root.dark {
+  --nextui-background-gradientStart: #121212;
+  --nextui-background-gradientEnd: #3a3a3a;
+  --nextui-background-fillColor: #e0e0e0;
+}
+
+/* Sombra personalizada para logos */
+.logo-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.dark .logo-shadow {
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.4);
+}

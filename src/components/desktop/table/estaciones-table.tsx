@@ -1,6 +1,7 @@
 'use client';
 
 import type { IEstacion } from '@/types/gaso-types';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import {
   Chip,
   Image,
@@ -97,7 +98,7 @@ const EstacionesTable: React.FC<Props> = ({ estaciones, rowsPerPage = 20 }) => {
                   }
                 }}
               >
-                🛈
+                <InformationCircleIcon className="size-6" />
               </span>
             </Tooltip>
           </div>

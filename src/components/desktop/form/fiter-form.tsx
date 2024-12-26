@@ -4,7 +4,6 @@ import { useComunidades, useMunicipios, useProductos, useProvincias } from '@/ho
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Button,
-  Input,
   Select,
   SelectItem,
   Slider,
@@ -126,35 +125,22 @@ const FilterForm: React.FC<FilterFormProps> = ({ onSubmit, canUseLocation }) => 
                   name="distancia"
                   control={control}
                   render={({ field }) => (
-                    <>
-                      <Input
-                        {...field}
-                        label={`Distancia: ${field.value} km`}
-                        type="range"
-                        min="1"
-                        max="100"
-                        step="1"
-                        value={field.value?.toString()}
-                        description={<span>{errors.distancia?.message}</span>}
-                        isInvalid={!!errors.distancia}
-                        className="accent-primary"
-                      />
-                      <Slider
-                        {...field}
-                        label={`Distancia: ${field.value} km`}
-                        minValue={1}
-                        maxValue={100}
-                        step={1}
-                        defaultValue={10}
-                        value={field.value}
-                        marks={[
-                          { value: 25, label: '25 km' },
-                          { value: 50, label: '50 km' },
-                          { value: 75, label: '75 km' },
-                        ]}
-                        getValue={_value => ``}
-                      />
-                    </>
+                    <Slider
+                      {...field}
+                      label={`Distancia: ${field.value} km`}
+                      minValue={1}
+                      maxValue={100}
+                      step={1}
+                      defaultValue={10}
+                      value={field.value}
+                      marks={[
+                        { value: 25, label: '25 km' },
+                        { value: 50, label: '50 km' },
+                        { value: 75, label: '75 km' },
+                      ]}
+                      getValue={_value => ``}
+                      className="pb-2"
+                    />
                   )}
                 />
               </div>

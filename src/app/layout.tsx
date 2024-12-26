@@ -1,27 +1,15 @@
 // app/layout.tsx
 import { fontSans } from '@/config/fonts';
-import { Providers } from './providers'; // Asegúrate de que la ruta sea correcta
+import { Providers } from './providers';
 import '@/styles/globals.css';
 
 const colors = [
-  {
-    name: 'light',
-  },
-  {
-    name: 'dark',
-  },
-  {
-    name: 'posthog',
-  },
-  {
-    name: 'darkBlue',
-  },
-  {
-    name: 'blossomTheme',
-  },
-  {
-    name: 'political',
-  },
+  { name: 'light' },
+  { name: 'dark' },
+  { name: 'posthog' },
+  { name: 'darkBlue' },
+  { name: 'blossomTheme' },
+  { name: 'political' },
 ];
 
 const themes = colors.map(color => color.name);

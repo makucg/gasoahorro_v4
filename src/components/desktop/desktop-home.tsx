@@ -3,14 +3,19 @@
 import { getUserLocation } from '@/api/services/locationService';
 import { useEstaciones } from '@/hooks/useGasolineras';
 import { logger } from '@/utils/logger';
-import { Tab, Tabs } from '@nextui-org/react';
+import { Spinner, Tab, Tabs } from '@nextui-org/react';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import FilterForm from './form/fiter-form';
 import EstacionesTable from './table/estaciones-table';
 
 const EstacionesMap = dynamic(() => import('./map/estaciones-map'), {
-  loading: () => <p>Cargando el mapa...</p>,
+  loading: () => (
+    <>
+      <p>Cargando el mapa...</p>
+      <Spinner />
+    </>
+  ),
   ssr: false,
 });
 
@@ -34,7 +39,6 @@ const DesktopHome: React.FC = () => {
   }, []);
 
   const handleFiltroSubmit = (nuevoFiltro: any) => {
-    logger.log('Filtro aplicado:', nuevoFiltro);
     setFiltro(nuevoFiltro);
 
     fetchEstaciones(nuevoFiltro, {
@@ -60,7 +64,12 @@ const DesktopHome: React.FC = () => {
               </div>
             )}
           >
-            {status === 'pending' && <div>Cargando estaciones...</div>}
+            {status === 'pending' && (
+              <div>
+                Cargando estaciones...
+                <Spinner />
+              </div>
+            )}
             {status === 'error' && (
               <div>
                 Error:

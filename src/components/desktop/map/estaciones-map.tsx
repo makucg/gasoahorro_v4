@@ -2,27 +2,25 @@
 
 import type { IEstacion } from '@/types/gaso-types';
 import { Button } from '@nextui-org/react';
-import L from 'leaflet';
-import React, { useMemo } from 'react';
+import dynamic from 'next/dynamic';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
-import 'leaflet-defaulticon-compatibility';
-
-// Icono personalizado para los marcadores
-const customIcon = new L.Icon({
-  iconUrl: '/assets/marker-blue.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
-
-// Icono personalizado para la estación seleccionada
-const selectedIcon = new L.Icon({
-  iconUrl: '/assets/marker-red.png',
-  iconSize: [32, 42],
-  iconAnchor: [12, 41],
-});
+const MapContainer = dynamic(
+  () => import('react-leaflet').then(module => module.MapContainer),
+  { ssr: false },
+);
+const TileLayer = dynamic(
+  () => import('react-leaflet').then(module => module.TileLayer),
+  { ssr: false },
+);
+const Marker = dynamic(
+  () => import('react-leaflet').then(module => module.Marker),
+  { ssr: false },
+);
+const Popup = dynamic(
+  () => import('react-leaflet').then(module => module.Popup),
+  { ssr: false },
+);
 
 type EstacionesMapProps = {
   estaciones: IEstacion[];
@@ -35,7 +33,33 @@ const EstacionesMap: React.FC<EstacionesMapProps> = ({
   estacionSeleccionada,
   defaultCoordinates,
 }) => {
-  // Coordenadas iniciales basadas en la estación seleccionada o por defecto
+  const [L, setLeaflet] = useState<typeof import('leaflet') | null>(null);
+  const [customIcon, setCustomIcon] = useState<L.Icon | null>(null);
+  const [selectedIcon, setSelectedIcon] = useState<L.Icon | null>(null);
+
+  useEffect(() => {
+    // Importar Leaflet dinámicamente
+    import('leaflet').then((leaflet) => {
+      setLeaflet(leaflet);
+
+      setCustomIcon(
+        new leaflet.Icon({
+          iconUrl: '/assets/marker-blue.png',
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+        }),
+      );
+
+      setSelectedIcon(
+        new leaflet.Icon({
+          iconUrl: '/assets/marker-red.png',
+          iconSize: [32, 42],
+          iconAnchor: [12, 41],
+        }),
+      );
+    });
+  }, []);
+
   const initialCoordinates: [number, number] = useMemo(() => {
     if (estacionSeleccionada) {
       return [
@@ -45,6 +69,10 @@ const EstacionesMap: React.FC<EstacionesMapProps> = ({
     }
     return defaultCoordinates;
   }, [estacionSeleccionada, defaultCoordinates]);
+
+  if (!L || !customIcon || !selectedIcon) {
+    return null; // Espera a que Leaflet se cargue
+  }
 
   return (
     <div className="h-96 w-full grow">
@@ -71,7 +99,9 @@ const EstacionesMap: React.FC<EstacionesMapProps> = ({
               zIndexOffset={isSelected ? 1000 : 0}
             >
               <Popup>
-                <p><strong>{estacion.Rótulo}</strong></p>
+                <p>
+                  <strong>{estacion.Rótulo}</strong>
+                </p>
                 <p>{estacion.Dirección}</p>
                 <p>
                   Precio:

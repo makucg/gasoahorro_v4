@@ -2,5 +2,18 @@
   "RootLayout": {
     "title": "Título de la página",
     "description": "Descripción de la página"
+  },
+  "DesktopHome": {
+    "loadingMap": "Cargando el mapa...",
+    "loadingStations": "Cargando estaciones...",
+    "error": "Error:",
+    "noStationsFound": "No se encontraron estaciones.",
+    "stationsFound": "Se encontraron {number} estaciones.",
+    "locationAccessDenied": "No se pudo acceder a la ubicación del usuario.",
+    "tabs": {
+      "list": "Lista",
+      "map": "Mapa",
+      "ariaLabel": "Vista de Estaciones"
+    }
   }
 }

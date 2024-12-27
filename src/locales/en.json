@@ -2,5 +2,18 @@
   "RootLayout": {
     "title": "Page title English",
     "description": "Page description English"
+  },
+  "DesktopHome": {
+    "loadingMap": "Loading the map...",
+    "loadingStations": "Loading stations...",
+    "error": "Error:",
+    "noStationsFound": "No stations found.",
+    "stationsFound": "Found {number} stations.",
+    "locationAccessDenied": "Unable to access user location.",
+    "tabs": {
+      "list": "List",
+      "map": "Map",
+      "ariaLabel": "Stations View"
+    }
   }
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import { Button, Card, Image, Spacer } from '@nextui-org/react';
-import Link from 'next/link';
 
 export default function GlobalNotFound() {
   return (
@@ -45,11 +44,15 @@ export default function GlobalNotFound() {
             incorrect or the page has been moved.
           </p>
           <Spacer y={1.5} />
-          <Link href="/" passHref>
-            <Button color="primary" size="lg">
-              Go Back Home
-            </Button>
-          </Link>
+          <Button
+            color="primary"
+            size="lg"
+            onPress={() => {
+              window.location.href = '/';
+            }}
+          >
+            Go Back Home
+          </Button>
         </Card>
       </main>
     </div>

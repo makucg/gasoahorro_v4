@@ -8,7 +8,6 @@ import { QueryClientProvider } from '@tanstack/react-query';
 
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: {

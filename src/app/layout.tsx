@@ -2,6 +2,7 @@
 import { fontSans } from '@/config/fonts';
 import { Providers } from './providers';
 import '@/styles/globals.css';
+import 'leaflet/dist/leaflet.css';
 
 const colors = [
   { name: 'light' },

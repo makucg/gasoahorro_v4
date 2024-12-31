@@ -23,7 +23,7 @@ const ExpandableCard: React.FC<ExpandableCardProps> = ({ estacion }) => {
       {/* Card Header - Always Visible */}
       <CardHeader
         onClick={toggleExpand}
-        className="flex cursor-pointer items-center justify-between p-4"
+        className="flex items-center justify-between p-4"
       >
         <div className="flex flex-col">
           <h3 className="text-lg font-bold">{estacion.Rótulo}</h3>
@@ -36,7 +36,7 @@ const ExpandableCard: React.FC<ExpandableCardProps> = ({ estacion }) => {
             </p>
           </div>
         </div>
-        <div>
+        <div className="flex items-center gap-2">
           <Chip
             style={{
               backgroundColor: estacion.gradient || 'gray',
@@ -48,21 +48,24 @@ const ExpandableCard: React.FC<ExpandableCardProps> = ({ estacion }) => {
             {' '}
             €/L
           </Chip>
-          <Button
-            isIconOnly
-            variant="light"
-            color="primary"
-            aria-label="Expandir o colapsar"
-            onPress={toggleExpand}
-          >
-            {isExpanded
-              ? (
-                  <ChevronUpIcon className="size-6 text-gray-600" />
-                )
-              : (
-                  <ChevronDownIcon className="size-6 text-gray-600" />
-                )}
-          </Button>
+          <div className="ml-auto flex items-center">
+            <Button
+              isIconOnly
+              variant="light"
+              color="primary"
+              aria-label="Expandir o colapsar"
+              onPress={toggleExpand}
+              className="ml-2"
+            >
+              {isExpanded
+                ? (
+                    <ChevronUpIcon className="size-6 text-gray-600" />
+                  )
+                : (
+                    <ChevronDownIcon className="size-6 text-gray-600" />
+                  )}
+            </Button>
+          </div>
         </div>
       </CardHeader>
 
@@ -122,10 +125,24 @@ const ExpandableCard: React.FC<ExpandableCardProps> = ({ estacion }) => {
           <Divider />
 
           {/* Card Footer */}
-          <CardFooter className="bg-gray-50 p-4">
-            <p className="text-center text-sm text-gray-500">
-              Pulsa en la distancia para más información.
-            </p>
+          <CardFooter className=" p-4">
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                `${estacion.Dirección}, ${estacion.Localidad}, ${estacion.Rótulo}`,
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full"
+            >
+              <Button
+                className="w-full"
+                color="primary"
+                variant="ghost"
+                aria-label="Abrir en Maps"
+              >
+                Abrir en Maps
+              </Button>
+            </a>
           </CardFooter>
         </>
       )}

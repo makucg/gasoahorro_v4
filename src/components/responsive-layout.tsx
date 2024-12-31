@@ -1,14 +1,29 @@
 'use client';
 
-import { useMediaQuery } from 'react-responsive';
+import { useEffect, useState } from 'react';
 import DesktopHome from './desktop/desktop-home';
 import MobileHome from './mobile/mobile-home';
 
 const ResponsiveLayout = () => {
-  // Detectar se é un dispositivo móbil (máximo 1024px de ancho)
-  const isMobile = useMediaQuery({ maxWidth: 1024 });
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
-  // Renderizar o fluxo apropiado
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 1024); // Breakpoint móvil
+    };
+
+    checkIsMobile(); // Detectar al cargar la página
+    window.addEventListener('resize', checkIsMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
+
+  if (isMobile === null) {
+    return <div>Cargando...</div>; // Placeholder mientras se detecta el dispositivo
+  }
+
   return isMobile ? <MobileHome /> : <DesktopHome />;
 };
 

@@ -3,12 +3,22 @@
 import { getUserLocation } from '@/api/services/locationService';
 import { useEstaciones } from '@/hooks/useGasolineras';
 import { logger } from '@/utils/logger';
-import { Button, Card, Tab, Tabs } from '@nextui-org/react';
+import { Button, Card, Spinner, Tab, Tabs } from '@nextui-org/react';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import FilterForm from './form/fiter-form';
-import EstacionesMapMobile from './map/estaciones-map';
 import CardList from './table/card-list';
+
+const EstacionesMapMobile = dynamic(() => import('./map/estaciones-map'), {
+  loading: () => (
+    <>
+      <p>Cargando el mapa...</p>
+      <Spinner />
+    </>
+  ),
+  ssr: false,
+});
 
 const MobileHome: React.FC = () => {
   const { mutate: fetchEstaciones, data, status, error } = useEstaciones();

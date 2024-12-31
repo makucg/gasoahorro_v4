@@ -126,23 +126,19 @@ const ExpandableCard: React.FC<ExpandableCardProps> = ({ estacion }) => {
 
           {/* Card Footer */}
           <CardFooter className=" p-4">
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                `${estacion.Dirección}, ${estacion.Localidad}, ${estacion.Rótulo}`,
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Button
               className="w-full"
+              color="primary"
+              variant="ghost"
+              aria-label="Abrir en Maps"
+              onPress={() => {
+                window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                  `${estacion.Dirección}, ${estacion.Localidad}, ${estacion.Rótulo}`,
+                )}`, '_blank');
+              }}
             >
-              <Button
-                className="w-full"
-                color="primary"
-                variant="ghost"
-                aria-label="Abrir en Maps"
-              >
-                Abrir en Maps
-              </Button>
-            </a>
+              Abrir en Maps
+            </Button>
           </CardFooter>
         </>
       )}

@@ -126,8 +126,9 @@ const EstacionesMapMobile: React.FC<EstacionesMapMobileProps> = ({
                     onPress={() => {
                       window.open(`https://www.google.com/maps?q=${lat},${lng}`, '_blank');
                     }}
+                    aria-label="Navegar en Maps"
                   >
-                    Navegar en Google Maps
+                    Navegar en Maps
                   </Button>
                   <Button
                     className="mt-2 w-full text-xs"

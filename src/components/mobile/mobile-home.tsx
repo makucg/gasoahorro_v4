@@ -32,7 +32,7 @@ const MobileHome: React.FC = () => {
   useEffect(() => {
     getUserLocation()
       .then((position) => {
-        const coords: [number, number] = [position.coords.latitude, position.coords.longitude];
+        const coords: [number, number] = [position.coords.longitude, position.coords.latitude];
         setUserLocation(coords);
         setCanUseLocation(true);
       })
@@ -45,7 +45,7 @@ const MobileHome: React.FC = () => {
   const requestLocation = () => {
     getUserLocation()
       .then((position) => {
-        const coords: [number, number] = [position.coords.latitude, position.coords.longitude];
+        const coords: [number, number] = [position.coords.longitude, position.coords.latitude];
         setUserLocation(coords);
         setCanUseLocation(true);
       })
@@ -116,7 +116,7 @@ const MobileHome: React.FC = () => {
                       </Card>
                     )}
                     {status === 'success' && estaciones.length > 0 && (
-                      <CardList estaciones={estaciones} />
+                      <CardList estaciones={estaciones} userLocation={userLocation} />
                     )}
                   </div>
                 </Tab>

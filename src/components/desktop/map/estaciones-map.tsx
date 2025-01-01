@@ -114,9 +114,9 @@ const EstacionesMap: React.FC<EstacionesMapProps> = ({
                   onPress={() => {
                     window.open(`https://www.google.com/maps?q=${lat},${lng}`, '_blank');
                   }}
-                  aria-label="Navegar en Maps"
+                  aria-label="Abrir mapa"
                 >
-                  Navegar en Maps
+                  Abrir mapa
                 </Button>
               </Popup>
             </Marker>

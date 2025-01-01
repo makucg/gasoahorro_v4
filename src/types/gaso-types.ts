@@ -72,3 +72,7 @@ export type IEstacion = {
 export type IResultados = {
   ListaEESSPrecio: IEstacion[];
 };
+
+export type DistanceResponse = {
+  distances: number[][];
+};

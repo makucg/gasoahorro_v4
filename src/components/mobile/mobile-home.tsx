@@ -116,7 +116,7 @@ const MobileHome: React.FC = () => {
                       </Card>
                     )}
                     {status === 'success' && estaciones.length > 0 && (
-                      <CardList estaciones={estaciones} userLocation={userLocation} />
+                      <CardList estaciones={estaciones} />
                     )}
                   </div>
                 </Tab>

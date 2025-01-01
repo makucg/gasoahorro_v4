@@ -5,10 +5,9 @@ import ExpandableCard from '@/components/mobile/table/expandable-card';
 
 type CardListProps = {
   estaciones: IEstacion[]; // Lista de estaciones
-  userLocation: [number, number] | null; // Coordenadas del usuario
 };
 
-const CardList: React.FC<CardListProps> = ({ estaciones, userLocation }) => {
+const CardList: React.FC<CardListProps> = ({ estaciones }) => {
   if (estaciones.length === 0) {
     return (
       <div className="flex items-center justify-center p-6 text-center text-gray-500">
@@ -20,7 +19,7 @@ const CardList: React.FC<CardListProps> = ({ estaciones, userLocation }) => {
   return (
     <div className="space-y-2">
       {estaciones.map((estacion, _index) => (
-        <ExpandableCard key={estacion.IDEESS} estacion={estacion} userLocation={userLocation} />
+        <ExpandableCard key={estacion.IDEESS} estacion={estacion} />
       ))}
     </div>
   );

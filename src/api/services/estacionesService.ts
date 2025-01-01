@@ -1,5 +1,5 @@
 import type { IComunidad, IMunicipio, IProducto, IProvincia, IResultados } from '@/types/gaso-types';
-import { calculateDistance, convertPrice, getMaxMinPrice, sortData } from '@/utils/data';
+import { assignDistances, calculateDistance, convertPrice, getMaxMinPrice, sortData } from '@/utils/data';
 import { calculateGradient } from '@/utils/gradient';
 import { Endpoints } from '../config';
 import http from '../http-common';
@@ -51,6 +51,8 @@ export const getEstaciones = async (
 
     // Filter by distance
     data.ListaEESSPrecio = data.ListaEESSPrecio.filter(estacion => filtro.distancia !== undefined && estacion.distance <= filtro.distancia);
+
+    data = await assignDistances([lon, lat], data);
   } else {
   // Caso de búsqueda por CCAA, Provincia, o Municipio
     const endpointMap = {

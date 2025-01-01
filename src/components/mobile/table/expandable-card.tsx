@@ -1,39 +1,18 @@
 'use client';
 
 import type { IEstacion } from '@/types/gaso-types';
-import { useDistanceCalculator } from '@/hooks/useDistanceCalculator';
 import { ChevronDownIcon, ChevronUpIcon, ClockIcon, CurrencyEuroIcon, GlobeAltIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { Button, Card, CardBody, CardFooter, CardHeader, Chip, Divider } from '@nextui-org/react';
 import { useState } from 'react';
 
 type ExpandableCardProps = {
   estacion: IEstacion;
-  userLocation: [number, number] | null; // Coordenadas del usuario
 };
 
-const ExpandableCard: React.FC<ExpandableCardProps> = ({ estacion, userLocation }) => {
+const ExpandableCard: React.FC<ExpandableCardProps> = ({ estacion }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [distance, setDistance] = useState<number | null>(null);
 
-  // Usamos useDistanceCalculator
-  const { mutateAsync: calculateDistance, status } = useDistanceCalculator();
-
-  const toggleExpand = async () => {
-    if (!isExpanded && userLocation && !distance) {
-      try {
-        const latitud = Number(estacion.Latitud.replace(',', '.'));
-        const longitud = Number(estacion['Longitud (WGS84)'].replace(',', '.'));
-
-        // Calcula la distancia solo si la tarjeta se expande
-        const result = await calculateDistance([userLocation, [longitud, latitud]]);
-        setDistance(result?.distances?.[0]?.[1] ?? null);
-      } catch (err) {
-        console.error('Error al calcular la distancia:', err);
-      }
-    }
-
-    setIsExpanded(!isExpanded);
-  };
+  const toggleExpand = () => setIsExpanded(!isExpanded);
 
   return (
     <Card
@@ -48,13 +27,24 @@ const ExpandableCard: React.FC<ExpandableCardProps> = ({ estacion, userLocation 
       >
         <div className="flex flex-col">
           <h3 className="text-lg font-bold">{estacion.Rótulo}</h3>
-          <div className="flex items-center gap-2">
-            <GlobeAltIcon className="size-5 text-primary-500" />
-            <p className="text-sm text-gray-600">
-              {estacion.distance.toFixed(2).replace('.', ',')}
-              {' '}
-              km
-            </p>
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <GlobeAltIcon className="size-5 text-primary-500" />
+              <p className="text-sm text-gray-600">
+                {estacion.distance.toFixed(2).replace('.', ',')}
+                {' '}
+                km
+              </p>
+            </div>
+            {estacion.distance_map !== null && (
+              <p className="pl-7 text-sm text-gray-600">
+                (aprox.
+                {' '}
+                {estacion.distance_map.toFixed(2).replace('.', ',')}
+                {' '}
+                km)
+              </p>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -134,31 +124,6 @@ const ExpandableCard: React.FC<ExpandableCardProps> = ({ estacion, userLocation 
                   {estacion.Horario}
                 </p>
               </div>
-              {status === 'pending'
-                ? (
-                    <div className="flex items-center gap-2">
-                      <GlobeAltIcon className="size-5 text-primary-500" />
-                      <p className="text-sm">Calculando distancia...</p>
-                    </div>
-                  )
-                : status === 'error'
-                  ? (
-                      <div className="flex items-center gap-2 text-red-500">
-                        <p className="text-sm">Error al calcular la distancia.</p>
-                      </div>
-                    )
-                  : status === 'success' && distance !== null && (
-                    <div className="flex items-center gap-2">
-                      <GlobeAltIcon className="size-5 text-primary-500" />
-                      <p className="text-sm">
-                        <strong>Distancia por carretera:</strong>
-                        {' '}
-                        {distance.toFixed(2)}
-                        {' '}
-                        km
-                      </p>
-                    </div>
-                  )}
             </div>
           </CardBody>
 

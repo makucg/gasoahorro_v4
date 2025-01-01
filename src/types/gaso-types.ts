@@ -64,6 +64,7 @@ export type IEstacion = {
   'latitude': number;
   'longitude': number;
   'distance': number;
+  'distance_map': number;
   'precio': number;
   'gradient': string;
   'color': string;

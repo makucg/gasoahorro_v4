@@ -49,11 +49,9 @@ export const siteConfig = {
     },
   ],
   links: {
-    github: 'https://github.com/nextui-org/nextui',
-    twitter: 'https://twitter.com/getnextui',
-    docs: 'https://nextui.org',
-    discord: 'https://discord.gg/9b6yyZKmH4',
-    sponsor: 'https://patreon.com/jrgarciadev',
+    github: 'https://github.com/makucg',
+    linkedin: 'https://www.linkedin.com/in/diego-montes-novio-50503448/',
+    sponsor: 'https://buymeacoffee.com/dmndev',
   },
 
   themes: [

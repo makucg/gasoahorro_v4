@@ -3,7 +3,7 @@
 import { siteConfig } from '@/config/site';
 import { Button, Link } from '@nextui-org/react';
 import React from 'react';
-import { DiscordIcon, GithubIcon, HeartFilledIcon, TwitterIcon } from './icons';
+import { GithubIcon, HeartFilledIcon, LinkedInIcon } from './icons';
 
 const Footer: React.FC = () => {
   return (
@@ -58,17 +58,10 @@ const Footer: React.FC = () => {
           <div className="flex gap-4">
             <Link
               isExternal
-              aria-label="Twitter"
-              href={siteConfig.links.twitter}
-            >
-              <TwitterIcon className="size-6 text-default-500" />
-            </Link>
-            <Link
-              isExternal
               aria-label="Discord"
-              href={siteConfig.links.discord}
+              href={siteConfig.links.linkedin}
             >
-              <DiscordIcon className="size-6 text-default-500" />
+              <LinkedInIcon className="size-6 text-default-500" />
             </Link>
             <Link
               isExternal
@@ -91,7 +84,7 @@ const Footer: React.FC = () => {
             startContent={<HeartFilledIcon className="text-danger" />}
             variant="flat"
           >
-            Sponsor Us
+            Sponsor
           </Button>
         </div>
       </div>
